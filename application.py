@@ -2,15 +2,15 @@ import os, random
 from flask import Flask, render_template, url_for, session, request
 
 
-app = Flask(__name__)
+application = Flask(__name__)
 
-app.secret_key = os.urandom(32)
+application.secret_key = os.urandom(32)
 
 
 colors = ["#FDB45C", "#F7464A", "#46BFBD", ]
 
 
-@app.route("/",  methods=['GET', 'POST'])
+@application.route("/",  methods=['GET', 'POST'])
 def home():
 
     session_results = session.get('session_results', None)
@@ -48,4 +48,4 @@ def home():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    application.run(debug=True)
