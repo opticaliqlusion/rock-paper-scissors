@@ -1,0 +1,48 @@
+{% extends "layout.html" %}
+{% block content %}
+
+    <div class="step0" style="height: 15%" >
+      <h2>Step 0 : Computer Chooses</h2>
+      <p>I've made my choice...</p>
+    </div>
+    <div class="step1" style="height: 25%" >
+      <h2>Step 1 : You Choose</h2>
+      <div class="choices">
+        <form action="/" method="post">
+          <button class="unstyled-button" type="submit" name="choice" value="rock">
+            <img src="static/rock.png" width=100px height=100px />
+          </button>
+          <button class="unstyled-button" type="submit" name="choice" value="paper">
+            <img src="static/paper.png" width=100px height=100px />
+          </button>
+          <button class="unstyled-button" type="submit" name="choice" value="scissors">
+            <img src="static/scissors.png" width=100px height=100px/>
+          </button>
+        </form>
+      </div>
+    </div>
+    <div class="step2" style="height: 25%" >
+      <h2>Step 2 : Results</h2>
+        {{ result }}
+        {{ session_results }}
+         <canvas id="chart" width="600" height="400"></canvas>
+    </div>
+
+    <script style="padding: 10px">
+    var pieData = [
+        {% for item, label, colors in set %}
+          {
+            value: {{item}},
+            label: "{{label}}",
+            color : "{{colors}}"
+          },
+        {% endfor %}
+      ];
+      // get bar chart canvas
+      var mychart = document.getElementById("chart").getContext("2d");
+
+      // draw pie chart
+      new Chart(document.getElementById("chart").getContext("2d")).Pie(pieData);
+    </script>
+
+{% endblock content %}
